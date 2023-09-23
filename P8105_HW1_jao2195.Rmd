@@ -18,14 +18,13 @@ Load the moderndive library, and use the following code to load the early_januar
 ```{r, message=FALSE}
 #1. Installing Packages and Libraries 
 
-#
-#Loading Libraries
+# Packages already installed, previously. 
+# Loading Libraries
 library(moderndive)
 library(tidyverse)
 library(ggplot2)
 
 #2. Loading early_january_weather dataset from moderndive package.
-
 data(early_january_weather)
 
 #3. Looking at help function to learn more about the variables in the dataset. 
@@ -41,32 +40,39 @@ Write a short description of the dataset using inline R code accessing the datas
 *the mean temperature
 
 ################################################################################
-# My Short Description of Early January Weather Dataset
+# My Short Description of Early January Weather Dataset (1.2)
 
 The Early January Weather data (early_january_weather) is a dataset that contains hourly meterological data for Laguardia (LGA), John F. Kennedy (JFK) N, and Newark (EWR) Airports in the New York City area. This data is a subset of the nycflights13 dataset in R.  This dataset contains `r ncol(early_january_weather)` variables: `r colnames(early_january_weather)` and `r nrow(early_january_weather)` observations. Values of importat variables in the dataset include: Average Preciptation, which was `r mean(pull(early_january_weather, precip))` inches. Maximum visibility in early January was `r max(pull(early_january_weather,visib))` miles. The mean (average) temperature in early January 2013 was `r round(mean(pull(early_january_weather, temp)))` degrees Fahrenheit !
 
 ################################################################################
 
-# Problem 1.3 - Creating Scatterplot of Humidity/Temperature Over Time
+# Problem 1.3 - Creating Scatterplot of Humidity/Temperature Over Time 
 
 Make a scatterplot of temp (y) vs time_hour (x); color points using the humid variable (adding color = ... inside of aes in your ggplot code should help). Describe patterns that are apparent in this plot.
 Export your scatterplot to your project directory using ggsave.
 
-################################################################################
-# My Short Description of the Scatterplot 
 
-
-```{r}
-#Creating Scatterplot, storing in myplot object.
+```{r, message=FALSE}
+#1. Creating Scatterplot, storing in myplot object.
 myplot <-
   ggplot(early_january_weather) + 
   geom_point(aes(x= time_hour, y = temp, col= humid)) + 
-  labs(x="Time", y="Temperature (Fahrenheit, F)", col="Relative Humidity", title="Temperature vs. Humidity ") 
+  labs(x="Time", y="Temperature (Fahrenheit, F)", col="Relative Humidity", title="Humidity/Temperature Over Time in Early January 2013 ") 
 
-#Printing myplot object to rendered document.
+#2. Printing myplot object to rendered document.
 myplot
 
-#Saving .png file version to plot to working directory (wd).
+#3. Saving .png file version to plot to working directory (wd).
 ggsave("Temp_Humid_Scatterplot_Problem 1.png") 
 
 ```
+
+################################################################################
+# My Short Description of the Scatterplot (1.3)
+
+During early January 2013, temperature ranged from `r round(range(pull(early_january_weather, temp)))` degress Fahrenheit. 
+Temperature fluctuated multiple times but had general upward tread (increase in temperature) with time. 
+In addition, humidity also increased with time, with humidity being the highest between January 11 - January 15th. 
+In general, as temperature increased, relative humidity increased.
+
+################################################################################
