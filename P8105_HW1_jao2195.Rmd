@@ -20,8 +20,8 @@ Load the moderndive library, and use the following code to load the early_januar
 # Packages already installed, previously. 
 # Loading Libraries
 library(moderndive)
-library(tidyverse)
 library(ggplot2)
+library(tidyverse)
 
 #2. Loading early_january_weather dataset from moderndive package.
 data(early_january_weather)
@@ -90,14 +90,41 @@ Try to take the mean of each variable in your dataframe. What works and what doe
 
 Hint: for now, to take the mean of a variable in a dataframe, you need to pull the variable out of the dataframe. Try loading the tidyverse and using the pull function.
 
-In some cases, you can explicitly convert variables from one type to another. Write a code chunk that applies the as.numeric function to the logical, character, and factor variables (please show this chunk but not the output). What happens, and why? Does this help explain what happens when you try to take the mean?
 
+
+
+```{r}
+jennsdataframe <- tibble (
+                    rand_sample = rnorm(10,0,1), 
+                    logical_vec = rand_sample > 0, 
+                    char_vec = c("Columbia","University","New","York","Manhattan","Brooklyn","Queens","Staten Island","Bronx","Long Island"), 
+                    factor_vec = c("High", "Medium","Low", "Low", "High","Medium", "Low", "Low", "Medium", "High"))
+  
+#Mean of random sample, rand_samp:                  
+rand <- mean(pull(jennsdataframe, rand_sample))
+
+#Mean of logical vector, logical_vec:  
+logic <- mean(pull(jennsdataframe, logical_vec))
+
+#Mean of character vector, char_vec:  
+char <- mean(pull(jennsdataframe, char_vec))
+
+#Mean of factor vector, factor_vec:  
+factor <- mean(pull(jennsdataframe, factor_vec))
+
+```
+We can see that for:
+
+1) Random Sample - A mean of  `r rand` is generated for our random variable vector.A mean number is returned. 
+1) Logical Vector - A mean of  `r logic` is generated for our random variable vector. A mean number is returned. 
+1) Character Vector - A mean of  `r char` is generated for our random variable vector. NA returned because Warning: argument is not numeric or logical.
+1) Factor Vector  - A mean of  `r factor` is generated for our random variable vector. NA returned because Warning: argument is not numeric or logical.
+
+#################################
+### Problem 2.2 
+In some cases, you can explicitly convert variables from one type to another. Write a code chunk that applies the as.numeric function to the logical, character, and factor variables (please show this chunk but not the output). What happens, and why? Does this help explain what happens when you try to take the mean?
 
 ```{r}
 
 ```
-
-
-
-
 
