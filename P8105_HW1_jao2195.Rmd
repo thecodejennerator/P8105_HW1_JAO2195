@@ -36,13 +36,15 @@ help(early_january_weather)
 Write a short description of the dataset using inline R code accessing the dataset help file can be informative. In your discussion, please include:
 
 *the variables in this dataset, including names / values of important variables
+
 *the size of the dataset (using nrow and ncol)
+
 *the mean temperature
 
 ################################################################################
 ### My Short Description of Early January Weather Dataset (1.2)
 
-The Early January Weather data (early_january_weather) is a dataset that contains hourly meterological data for Laguardia (LGA), John F. Kennedy (JFK) N, and Newark (EWR) Airports in the New York City area. This data is a subset of the nycflights13 dataset in R.  This dataset contains `r ncol(early_january_weather)` variables: `r colnames(early_january_weather)` and `r nrow(early_january_weather)` observations. Values of important variables in the dataset including but not limited to: Average Preciptation, which was `r round(mean(pull(early_january_weather, precip)))` inches. Maximum visibility in early January was `r max(pull(early_january_weather,visib))` miles. The mean (average) temperature in early January 2013 was `r round(mean(pull(early_january_weather, temp)))` degrees Fahrenheit !
+The Early January Weather data (early_january_weather) is a dataset that contains hourly meterological data for Laguardia (LGA), John F. Kennedy (JFK) , and Newark (EWR) Airports in the New York City area. This data is a subset of the nycflights13 dataset in R.  This dataset contains `r ncol(early_january_weather)` variables: `r colnames(early_january_weather)` and `r nrow(early_january_weather)` observations. Values of important variables in the dataset including but not limited to: Average Preciptation, which was `r round(mean(pull(early_january_weather, precip)))` inches. Maximum visibility in early January was `r max(pull(early_january_weather,visib))` miles. The mean (average) temperature in early January 2013 was `r round(mean(pull(early_january_weather, temp)))` degrees Fahrenheit !
 
 ################################################################################
 ### Problem 1.3 - Creating Scatterplot of Humidity/Temperature Over Time 
@@ -70,7 +72,7 @@ ggsave("Temp_Humid_Scatterplot_Problem 1.png")
 ################################################################################
 ### My Short Description of the Scatterplot (1.3)
 
-During early January 2013, temperature ranged from `r round(range(pull(early_january_weather, temp)))` degrees Fahrenheit. 
+During early January 2013, temperature ranged from `r round(min(pull(early_january_weather, temp)))` and `r round(max(pull(early_january_weather, temp)))`degrees Fahrenheit. 
 Temperature fluctuated multiple times but had general upward tread (increasing temperature with time). 
 In addition, humidity also increased with time, with humidity being the highest between January 11 - January 15th. 
 In general, as temperature increased, relative humidity increased.
@@ -91,8 +93,6 @@ a factor vector of length 10, with 3 different factor “levels”
 Try to take the mean of each variable in your dataframe. What works and what doesn’t?
 
 Hint: for now, to take the mean of a variable in a dataframe, you need to pull the variable out of the dataframe. Try loading the tidyverse and using the pull function.
-
-
 
 
 ```{r}
@@ -145,8 +145,12 @@ char_num <- mean(as.numeric(pull(jennsdataframe, char_vec)))
 factor_num <- mean(as.numeric(pull(jennsdataframe, factor_vec)))
 ```
 
-We can see that for the new coerced variables:
+We can see that for the new as.numeric() coerced variables:
 
 1) Logical Vector - A mean of  **`r logic_num`** is generated for our vector. A mean number is returned. This happens because the logical values of TRUE and FALSE are converted to numerical 1s and 0s.  Yes this does explain what happens when we are trying to take the mean as the mean value is the average of the 0s and 1s in the vector. 
 2) Character Vector - A mean of  **`r char_num`** is generated for our vector. NA returned because Warning: NAs introduced by coercion. This happened because you cannot convert a character into a number. This does explain what happened when were trying to take the mean as we cannot compute a mean on characters. 
 3) Factor Vector  - A mean of  **`r factor_num`** is generated for our vector. NA returned because Warning: NAs introduced by coercion. This happened because you cannot convert a character into a number. This does explain what happened when were trying to take the mean as we cannot compute a mean on factor characters. 
+
+###############################
+####   End Of Homework 1   ####
+###############################
